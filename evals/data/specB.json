@@ -1,0 +1,24 @@
+{
+  "plot_type": "boxplot_or_violin_with_points",
+  "input_table": "twogroup.csv",
+  "mapping": {
+    "x": "group",
+    "y": "response",
+    "kind": "box"
+  },
+  "journal_style": "publication",
+  "output": {
+    "formats": [
+      "svg",
+      "png"
+    ],
+    "dpi": 300
+  },
+  "statistics": {
+    "enabled": true,
+    "test": "welch_t",
+    "correction": "none",
+    "alpha": 0.05,
+    "annotate": true
+  }
+}

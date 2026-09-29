@@ -1,0 +1,19 @@
+{
+  "plot_type": "volcano_plot",
+  "input_table": "de_results.csv",
+  "mapping": {
+    "x": "log2FoldChange",
+    "p": "padj",
+    "label": "gene",
+    "p_cutoff": 0.05,
+    "lfc_cutoff": 1.0
+  },
+  "journal_style": "publication",
+  "output": {
+    "formats": [
+      "svg",
+      "png"
+    ],
+    "dpi": 300
+  }
+}

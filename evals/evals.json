@@ -1,0 +1,47 @@
+{
+  "note": "Eval cases for make-my-figure (validated on engine v1.1.1, 2026-09-29: with_skill 3/3, without_skill 0/3). Prompts reference fixture tables under this skill's evals/data/; the executor should substitute {skill_dir} with the absolute skill directory and give each arm its own empty output dir. Every arm must write a transcript.txt logging each command it ran. File names in the prompts are the assertion targets — keep them stable.",
+  "evals": [
+    {
+      "id": "volcano-from-de-table",
+      "prompt": "我有一份差异分析结果表 {skill_dir}/evals/data/de_results.csv（列：gene、log2FoldChange、padj，共30个基因）。帮我画一张发表级火山图，显著阈值设为 |log2FC|>1 且 padj<0.05，导出 volcano.svg 和 volcano.png 到你的输出目录，并在输出目录里留下可复现的做图记录文件和 transcript.txt（简述做法与你运行的每条命令）。",
+      "assertions": [
+        {"type": "contains", "value": "volcano"}
+      ],
+      "file_assertions": [
+        {"type": "file-exists", "path": "volcano.svg"},
+        {"type": "file-exists", "path": "volcano.png"},
+        {"type": "file-exists", "path": "volcano.plot_spec.json"},
+        {"type": "file-regex", "path": "transcript.txt", "value": "volcano_plot"},
+        {"type": "file-regex", "path": "volcano.plot_spec.json", "value": "log2FoldChange"}
+      ]
+    },
+    {
+      "id": "boxplot-with-welch-t",
+      "prompt": "用数据表 {skill_dir}/evals/data/twogroup.csv（列：group、response，Control/Treatment 两组各10只小鼠的血糖值）画箱线图，比较两组并做 Welch t 检验，把显著性标注画在图上，导出 box.svg 和 box.png 到输出目录，留下可复现记录和 transcript.txt（含你运行的命令与得到的 p 值）。",
+      "assertions": [
+        {"type": "contains", "value": "box"}
+      ],
+      "file_assertions": [
+        {"type": "file-exists", "path": "box.svg"},
+        {"type": "file-exists", "path": "box.png"},
+        {"type": "file-exists", "path": "box.plot_spec.json"},
+        {"type": "file-exists", "path": "box.stats_spec.json"},
+        {"type": "file-regex", "path": "transcript.txt", "value": "[Ww]elch"},
+        {"type": "file-regex", "path": "box.stats_spec.json", "value": "welch_t"}
+      ]
+    },
+    {
+      "id": "multipanel-figure1",
+      "prompt": "我此前用可复现做图流程保存了两张单图的规格文件：{skill_dir}/evals/data/specA.json（火山图）和 {skill_dir}/evals/data/specB.json（箱线图），对应数据表也在同目录。请把这两张图拼成一张双栏 Figure 1（panel 标签 A、B），导出 figure1.svg 和 figure1.png 到输出目录，并留下组合图的可复现记录和 transcript.txt（含你运行的每条命令）。",
+      "assertions": [
+        {"type": "contains", "value": "Figure 1"}
+      ],
+      "file_assertions": [
+        {"type": "file-exists", "path": "figure1.svg"},
+        {"type": "file-exists", "path": "figure1.png"},
+        {"type": "file-exists", "path": "figure1.figure_spec.json"},
+        {"type": "file-regex", "path": "transcript.txt", "value": "[Pp]anel"}
+      ]
+    }
+  ]
+}

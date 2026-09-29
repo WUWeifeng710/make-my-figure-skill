@@ -1,0 +1,13 @@
+{
+  "note": "Trigger calibration for make-my-figure (2026-09-29: 8/8 correct, accuracy 1.0 under triple self-reported decisions). First half should activate the skill; second half shares keywords but needs a different tool. Query 2 ('box plot + significance', no tool naming) was the weakest trigger at activation 0.67 — re-test it after any description change.",
+  "queries": [
+    {"query": "我有一份DESeq2差异基因结果表，帮我画一张能发paper的火山图", "should_trigger": true},
+    {"query": "把这两组细胞实验数据做成箱线图并标上显著性", "should_trigger": true},
+    {"query": "帮我把四张已经画好的单图拼成2x2的Figure 1，带A/B/C/D标签", "should_trigger": true},
+    {"query": "我要一个可复现的科研画图流程，画出图的同时把用到的p值都记录下来", "should_trigger": true},
+    {"query": "用临床随访数据画Kaplan-Meier生存曲线并做log-rank检验", "should_trigger": true},
+    {"query": "跑一下RNA-seq差异表达分析，从raw counts到结果表用DESeq2", "should_trigger": false},
+    {"query": "帮我调整这张已经画好的SVG图的字体、线宽和布局，改成Nature风格", "should_trigger": false},
+    {"query": "帮我写论文里Figure 1的legend文字", "should_trigger": false}
+  ]
+}
